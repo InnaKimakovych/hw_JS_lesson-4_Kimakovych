@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<!-- Доработайте пример, 005_thisExample.html, при наведении мыши к одному из блоков, цвет блока должен измениться, на уникальный, такой которого еще 
+нету у существующих блоков. Также выведите в блок текстовое оповещение о информации цвета, который используется для фона данного блока. При попытке 
+закрыть вкладку, придупредите пользователя о том что информация будет утеряна. Используйте window.onload.  -->
+<html>
+<head>
+    <title>Ключевое слово this</title>
+    <style>
+        body {
+            display: table;
+        }
+        div {
+            display: table-cell;
+            background-color:green;
+            display: inline-block;
+            height: 100px;
+            width: 100px;
+            margin: 10px;
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
+
+</head>
+<body>
+    <script async>
+            window.onbeforeunload = function () {
+            return "Данные не сохранены. Точно перейти? Не смейте!";
+    }          
+    </script>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+
+    <script>
+    var colors = [];
+    function setColor(){
+	   var randomNumber = Math.round(Math.random(999999)*1000000);
+	   var color = "#";
+	   for (var i = 0; i <= (6 - randomNumber.length); i++) {
+	       color = color + "0";
+	   };
+	   color = color + randomNumber;
+
+	   var k = 0;
+	   for (var j = 0; j < colors.length; j++) {
+		  if (colors.length[j] == color) {
+		      k++;
+	       }
+        }
+	   if(k != 0) {
+		  setColor();
+	   } else { colors[colors.length] = color;
+            return color;
+	   };
+    };
+
+    var divArr = document.getElementsByTagName("div");
+        for (var i = 0; i < divArr.length; i++) {
+            divArr[i].onclick = function () {
+                this.style.backgroundColor = "red";
+            }
+        divArr[i].onmouseenter = function () {
+		    var colorBlock = setColor();
+            this.style.backgroundColor = colorBlock;
+            var colorBlock = this.style.backgroundColor;
+            this.innerHTML = colorBlock;
+        };
+        divArr[i].onmouseleave = function () {
+            this.style.backgroundColor = "green";
+            this.innerHTML = "";
+        };
+    }
+  </script>
+</body>
+</html>

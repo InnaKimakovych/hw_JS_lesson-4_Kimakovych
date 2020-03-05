@@ -1,0 +1,54 @@
+﻿<!-- Напишите регулярные выражения, которые будут выбирать 
+    индекс - 55535 - 5 numbers
+    ip адресс, 
+пример 255.255.255.255
+    цены в долларах - $0.84, $2.84, $4
+    дата в виде - 30/12/2016 - день, месяц, год
+ -->
+ 
+<!DOCTYPE html>
+ 
+<html lang="en">
+ 
+<head>
+ 	<meta charset="UTF-8">
+ 	
+<title>Document</title>
+
+ </head>
+
+ <body>
+ 
+	<p id="demo1"></p>
+	<p id="demo2"></p>
+	<p id="demo3"></p>
+	<p id="demo4"></p>
+	<p id="demo5"></p>
+<script type="text/javascript">
+
+(function myFunction() {
+    
+    var str = "индекс - 55535 - 5 numbers,ip адресс, пример 255.255.255.255, цены в долларах - $0.84, $2.84, $4, дата в виде - 30/12/2016 - день, месяц, год";
+    document.getElementById("demo1").innerHTML = str;
+
+    var patt_index = new RegExp(/\b\d{5}\b/);
+    var patt_ip = new RegExp(/[1-2]{0,1}\d[0-9]{0,1}[.][1-2]{0,1}\d[0-9]{0,1}[.][1-2]{0,1}\d[0-9]{0,1}[.][1-2]{0,1}\d[0-9]{0,1}/g);
+    var patt_price = new RegExp(/\$\d[.]\d{2}|\$\d/g);
+    var patt_day = /[1-3]{0,1}[0-9]{1}\/[1]{0,1}[0-9]{1}\/[1,2]{1}\d{3}/;
+
+    var result_index = patt_index.exec(str);
+    var result_ip = patt_ip.exec(str);
+    var result_price = str.match(patt_price);
+    var result_day = patt_day.exec(str);
+
+
+    document.getElementById("demo2").innerHTML = "Индекс: " + result_index;
+    document.getElementById("demo3").innerHTML = "ip: " + result_ip;
+    document.getElementById("demo4").innerHTML = "Стоимость: " + result_price;
+    document.getElementById("demo5").innerHTML = "Дата: " + result_day;
+
+ })();
+</script>
+ 
+</body>
+ </html>
